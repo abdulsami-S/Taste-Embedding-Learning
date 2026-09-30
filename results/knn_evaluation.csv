@@ -1,0 +1,4 @@
+version,category_match@10,label_overlap@10 (Jaccard)
+text_A,0.6047600000000001,0.3602475665445665
+text_B,0.6102,0.3773883885558886
+random (chance),0.18013121999999998,

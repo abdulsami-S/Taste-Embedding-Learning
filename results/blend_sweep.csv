@@ -1,0 +1,6 @@
+raw_weight,category_match@10,jaccard@10,burger~chicken_burger,burger~pizza,burger~dosa,burger~cake,order_ok
+0.0,0.676,0.419,0.746,0.694,0.776,0.496,False
+0.25,0.683,0.425,0.726,0.661,0.673,0.44,False
+0.5,0.679,0.416,0.705,0.627,0.569,0.384,True
+0.75,0.659,0.4,0.684,0.594,0.466,0.328,True
+1.0,0.599,0.359,0.663,0.56,0.363,0.273,True

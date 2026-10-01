@@ -132,6 +132,14 @@ Blend sweep (raw weight α):
 
 ### 🚀 Demo
 
+**Web Chat Interface:**
+Start the local FastAPI server to launch the interactive recipe chat application:
+```bash
+uvicorn server.app:app --reload --port 8000
+```
+Then open `http://localhost:8000` in your browser. The app uses an LLM (powered by Anthropic API) to understand queries and converse, backed by the taste embedding search.
+
+**CLI Recommendation:**
 ```bash
 python src/recommend.py "Dosa" "rice, urad dal, fenugreek seeds, salt, oil"
 ```
@@ -145,6 +153,15 @@ python src/recommend.py "Dosa" "rice, urad dal, fenugreek seeds, salt, oil"
 ```
 
 Although the 10,000-recipe sample contains no dosa recipes, several of the nearest neighbors are legume-based dishes (beans, dal, chickpeas).
+
+---
+
+## 🌐 Web Chat Application
+
+The repository includes a full-stack interactive web application built on top of the taste embeddings.
+
+- **Backend (`server/`)**: A fast, asynchronous API built with FastAPI. It loads the precomputed embeddings and projector state into memory on startup. It exposes endpoints for direct similarity search (`/similar`) and an intelligent chat agent (`/chat`). The chat endpoint leverages Anthropic's Claude LLM to classify user intents—if a user asks for recipes, it queries the embedding space and returns visually-rich recipe cards; if they just say "hello", it responds conversationally.
+- **Frontend (`client/`)**: A responsive, vanilla HTML/JS/CSS frontend that provides a modern chat UI. It supports markdown-like formatting, auto-scrolling, typing indicators, and dynamically renders recipe matches with similarity scores and expandable ingredient lists.
 
 ---
 
@@ -169,8 +186,11 @@ Although the 10,000-recipe sample contains no dosa recipes, several of the neare
 3. Install dependencies:
 ```bash
    pip install -r requirements.txt
+   pip install -r server/requirements.txt   # For the web backend
 ```
-4. Run the pipeline from the project root:
+4. Configure environment variables (optional, for LLM chat):
+   Copy `.env.example` to `.env` and add your Anthropic API key.
+5. Run the pipeline from the project root:
 ```bash
    python src/prepare_data.py        # clean data, sample 10k recipes, build text versions
    python src/embed_recipes.py       # baseline embeddings for text A and B
@@ -182,6 +202,10 @@ Although the 10,000-recipe sample contains no dosa recipes, several of the neare
    python src/blend_eval.py          # sweep the raw/learned blend weight
    python src/final_report.py        # final tables and figures
    python src/recommend.py "Recipe name" "ingredient 1, ingredient 2, ..."
+```
+6. Start the web application:
+```bash
+   uvicorn server.app:app --reload --port 8000
 ```
 
 Developed with Python 3.14 on macOS. Random seeds are fixed (42) for sampling, the train/test split, and training.
@@ -196,6 +220,16 @@ taste-embedding-learning/
 ├── LICENSE
 ├── requirements.txt
 ├── .gitignore
+├── .env.example
+├── client/
+│   ├── index.html
+│   ├── app.js
+│   └── styles.css
+├── server/
+│   ├── app.py
+│   ├── chat.py
+│   ├── retrieval.py
+│   └── requirements.txt
 ├── data/
 │   ├── raw/recipes.csv              (not in repo)
 │   └── processed/                   (not in repo)

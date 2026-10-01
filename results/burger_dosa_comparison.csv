@@ -1,0 +1,5 @@
+pair,raw_similarity,learned_similarity
+burger vs chicken burger,0.663,0.746
+burger vs pizza,0.56,0.694
+burger vs dosa,0.363,0.776
+burger vs cake,0.273,0.496

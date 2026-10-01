@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer
+from projector import Projector
 
 torch.manual_seed(42)
 np.random.seed(42)
@@ -35,17 +36,6 @@ train_idx, test_idx = train_test_split(idx, test_size=0.2, random_state=42)
 
 Xtr, Xte = torch.tensor(X[train_idx]), torch.tensor(X[test_idx])
 Ytr = torch.tensor(Y[train_idx])
-
-# ---------- Model ----------
-class Projector(nn.Module):
-    def __init__(self, d_in=384, d_hidden=512, d_out=128):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(d_in, d_hidden), nn.ReLU(), nn.Dropout(0.1),
-            nn.Linear(d_hidden, d_out),
-        )
-    def forward(self, x):
-        return F.normalize(self.net(x), dim=-1)
 
 model = Projector()
 opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-5)

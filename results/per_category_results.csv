@@ -1,0 +1,10 @@
+,raw (pretrained),learned,blend (raw weight 0.5)
+breakfast,0.467,0.569,0.565
+casserole,0.622,0.728,0.755
+dessert,0.803,0.899,0.887
+dinner,0.641,0.724,0.741
+lunch,0.191,0.307,0.266
+other,0.371,0.336,0.383
+salad,0.779,0.924,0.907
+side,0.404,0.527,0.491
+soup,0.852,0.93,0.924

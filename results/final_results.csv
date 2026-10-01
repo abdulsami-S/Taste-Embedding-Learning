@@ -1,0 +1,5 @@
+model,category_match@10,jaccard@10
+raw (pretrained),0.599,0.359
+learned,0.676,0.419
+blend (raw weight 0.5),0.679,0.416
+random (chance),0.181,
